@@ -13,8 +13,10 @@ docker compose run --rm backend bundle exec rails g scaffold post title:string b
 
 ### フロントエンド
 
-フロント
+下記コマンドを実行
 
 ```zsh
 docker compose run frontend npx create-next-app@latest
+# mya-appに指定アプリ名によってdocker-composeの中身編集する必要あり
+docker compose up
 ```
