@@ -30,4 +30,11 @@ prune:
 
 # bundle install
 bundle:
-	docker compose run backend bundle install
+	docker compose run backend bundle
+
+# rubocop
+rubocop:
+	docker compose run backend bundle exec rubocop
+
+rubocop a:
+	docker compose run backend bundle exec rubocop -a
