@@ -27,3 +27,7 @@ down:
 # volume以外を削除
 prune:
 	docker system prune
+
+# bundle install
+bundle:
+	docker compose run backend bundle install
