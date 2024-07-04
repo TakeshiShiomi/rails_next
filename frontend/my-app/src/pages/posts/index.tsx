@@ -43,7 +43,7 @@ const PostsIndex = () => {
                 {posts.map(post => (
                     <li key={post.id}>
                         <Link href={`/posts/${post.id}`}>{post.title}</Link>
-                        {/* <button onClick={() => router.push(`/posts/${post.id}/edit`)}>Edit</button> */}
+                        <button onClick={() => router.push(`/posts/${post.id}/edit`)}>Edit</button>
                         <button onClick={() => handleDelete(post.id)}>Delete</button>
                     </li>
                 ))}

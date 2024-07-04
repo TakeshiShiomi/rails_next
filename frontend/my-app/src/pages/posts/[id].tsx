@@ -8,7 +8,7 @@ interface Post {
     body: string;
 }
 
-const PostPage: React.FC = () => {
+const PostPage = () => {
     const router = useRouter();
     const { id } = router.query;
     const [post, setPost] = useState<Post | null>(null);
