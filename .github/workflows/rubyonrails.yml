@@ -62,6 +62,8 @@ jobs:
           bundle exec rspec
   lint:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: backend/Gemfile
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -69,6 +71,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.3
+          bundler-cache: true
       - name: Install gems
         run: |
           cd backend
