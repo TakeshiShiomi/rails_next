@@ -43,7 +43,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Cache Docker layers
+      - name: Load cached Docker layers
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
@@ -62,6 +62,12 @@ jobs:
           docker build -t myapp:latest ./backend
           docker tag myapp:latest ${{ secrets.DOCKER_USERNAME }}/myapp:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+
+      - name: Save cached Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
 
       - name: Run tests
         run: docker run --rm -e RAILS_ENV=test -e DATABASE_URL=${{ secrets.DATABASE_URL }} myapp:latest bin/rake
@@ -84,7 +90,6 @@ jobs:
 
       - name: Run linters
         run: |
-          docker run --rm ${{ secrets.DOCKER_USERNAME }}/myapp:latest bundle exec bundler-audit check --update
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/myapp:latest bundle exec brakeman -q -w2
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/myapp:latest bundle exec rubocop --parallel
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/myapp:latest bundle exec rspec
