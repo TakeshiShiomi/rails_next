@@ -62,32 +62,21 @@ jobs:
           bundle exec rspec
   lint:
     runs-on: ubuntu-latest
-    env:
-      BUNDLE_GEMFILE: backend/Gemfile
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install Ruby
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.3
           bundler-cache: true
-      - name: Install gems
-        run: |
-          cd backend
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+      - name: Install dependencies
+        run: cd backend && bundle install
       # Add or replace any other lints here
       # bundler-auditは定期的にgemのupgradeを警告するので、コメントアウト
       # - name: Security audit dependencies
-      #   run: |
-      #     cd backend
-      #     bundle exec bundler-audit check --update
+      #   run: cd backend && bundle exec bundler-audit check --update
       - name: Security audit application code
-        run: |
-          cd backend
-          bundle exec brakeman -q -w2
+        run: cd backend && bundle exec brakeman -q -w2
       - name: Lint Ruby files
-        run: |
-          cd backend
-          bundle exec rubocop --parallel
+        run: cd backend && bundle exec rubocop --parallel
