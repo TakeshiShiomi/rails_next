@@ -36,5 +36,24 @@ bundle:
 rubocop:
 	docker compose run backend bundle exec rubocop
 
-rubocop a:
+rubocop-a:
 	docker compose run backend bundle exec rubocop -a
+
+# rspec
+rspec:
+	docker compose run backend bundle exec rspec
+
+# bundler audit
+audit:
+	docker compose run backend bundle exec bundler-audit check --update
+
+# brakeman
+brake:
+	docker compose run backend bundle exec brakeman
+
+# backendチェック
+fixb:
+	docker compose run backend bundle exec rubocop && \
+	docker compose run backend bundle exec rspec && \
+	docker compose run backend bundle exec bundler-audit check --update && \
+	docker compose run backend bundle exec brakeman
