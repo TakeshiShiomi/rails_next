@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11-alpine
+        image: postgres:16
         ports:
           - "5432:5432"
         env:
@@ -39,47 +39,72 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          path: backend
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3.3 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
-          bundler-cache: true
-        working-directory: backend
-      # Add or replace database setup steps here
-      - name: Set up database schema
-        run: bin/rails db:schema:load
-        working-directory: backend
-      # Add or replace test runners here
-      - name: Run tests
-        run: bin/rake
-        working-directory: backend
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
         with:
-          path: backend
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3.3
-          bundler-cache: true
-        working-directory: backend
-      # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bundle exec bundler-audit check --update
-        working-directory: backend
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
-        working-directory: backend
-      - name: Lint Ruby files
-        run: bundle exec rubocop --parallel
-        working-directory: backend
-      - name: Rspec tests
-        run: bundle exec rspec
-        working-directory: backend
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build Docker image
+        run: docker build -t myapp:latest .
+
+      - name: Run tests
+        run: docker run --rm -e RAILS_ENV=test -e DATABASE_URL=${{ secrets.DATABASE_URL }} myapp:latest bin/rake
+
+      - name: Run linters
+        run: |
+          docker run --rm myapp:latest bundle exec bundler-audit check --update
+          docker run --rm myapp:latest bundle exec brakeman -q -w2
+          docker run --rm myapp:latest bundle exec rubocop --parallel
+          docker run --rm myapp:latest bundle exec rspec
+
+      # # Add or replace dependency steps here
+      # - name: Install Ruby and gems
+      #   uses: ruby/setup-ruby@v1
+      #   with:
+      #     ruby-version: 3.3.3 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
+      #     bundler-cache: true
+      # # Add or replace database setup steps here
+      # - name: Set up database schema
+      #   run: |
+      #     cd backend
+      #     bin/rails db:schema:load
+      # # Add or replace test runners here
+      # - name: Run tests
+      #   run: |
+      #     cd backend
+      #     bin/rake
+
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #     - name: Install Ruby and gems
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: 3.3.3
+  #         bundler-cache: true
+  #     # Add or replace any other lints here
+  #     - name: Security audit dependencies
+  #       run: |
+  #         cd backend
+  #         bundle exec bundler-audit check --update
+  #     - name: Security audit application code
+  #       run: |
+  #         cd backend
+  #         bundle exec brakeman -q -w2
+  #     - name: Lint Ruby files
+  #       run: |
+  #         cd backend
+  #         bundle exec rubocop --parallel
+  #     - name: Rspec tests
+  #       run: |
+  #         cd backend
+  #         bundle exec rspec
