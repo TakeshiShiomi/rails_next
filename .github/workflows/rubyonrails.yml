@@ -21,6 +21,7 @@ name: "Ruby on Rails CI"
 on:
   push:
   pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,58 +35,41 @@ jobs:
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
     env:
+      BUNDLE_GEMFILE: backend/Gemfile
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install Ruby
+      - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.3
-      - name: Install gems
-        run: |
-          cd backend
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
       - name: Set up database schema
-        run: |
-          cd backend
-          bin/rails db:create db:schema:load --trace
+        run: bin/rails db:create db:schema:load --trace
       - name: Run tests
-        run: |
-          cd backend
-          bin/rake
+        run: bin/rake
       - name: Rspec tests
-        run: |
-          cd backend
-          bundle exec rspec
+        run: bundle exec rspec
 
   lint:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: backend/Gemfile
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install Ruby
+      - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.3
-      - name: Install gems
-        run: |
-          cd backend
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
       # Add or replace any other lints here
       # bundler-auditは定期的にgemのupgradeを警告するので、コメントアウト
       # - name: Security audit dependencies
-      #   run: |
-      #     cd backend
-      #     bundle exec bundler-audit check --update
+      #   run: bundle exec bundler-audit check --update
       - name: Security audit application code
-        run: |
-          cd backend
-          bundle exec brakeman -q -w2
+        run: bundle exec brakeman -q -w2
       - name: Lint Ruby files
-        run: |
-          cd backend
-          bundle exec rubocop --parallel
+        run: bundle exec rubocop --parallel
