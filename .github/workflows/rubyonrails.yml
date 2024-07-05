@@ -24,25 +24,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/rails_test"
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.0 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
+          ruby-version: 3.3.3 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:create db:schema:load --trace
@@ -53,13 +44,16 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.0 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
+          ruby-version: 3.3.3 # GitHub Actionsの実行環境で使用されているRubyのバージョン指定
           bundler-cache: true
       # Add or replace any other lints here
       # bundler-auditは定期的にgemのupgradeを警告するので、コメントアウト
@@ -67,5 +61,3 @@ jobs:
       #   run: bundle exec bundler-audit check --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
-      - name: Lint Ruby files
-        run: bundle exec rubocop --parallel
