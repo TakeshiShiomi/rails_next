@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build Docker image
-        run: docker build -t myapp:latest .
+        run: docker build -t myapp:latest ./backend
 
       - name: Run tests
         run: docker run --rm -e RAILS_ENV=test -e DATABASE_URL=${{ secrets.DATABASE_URL }} myapp:latest bin/rake
