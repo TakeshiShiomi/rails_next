@@ -14,7 +14,7 @@ module Myapp
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -33,8 +33,8 @@ module Myapp
       allow do
         origins 'http://localhost:8000' # フロントエンドのURLを指定
         resource '*',
-          headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+                 headers: :any,
+                 methods: [:get, :post, :put, :patch, :delete, :options, :head]
       end
     end
   end
