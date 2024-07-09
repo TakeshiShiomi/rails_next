@@ -8,7 +8,7 @@
 docker compose run --rm backend rails new . --force --database=postgresql --api
 docker compose up --build
 docker compose exec backend rails db:create
-docker compose run --rm backend bundle exec rails g scaffold post title:string body:text
+docker compose run --rm backend bundle exec rails g scaffold api/v1/post title:string body:text
 ```
 
 ##### rspec Gemfile 追記 bundle 実行後下記コマンドで初期セットアップ実行
