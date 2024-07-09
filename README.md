@@ -11,6 +11,26 @@ docker compose exec backend rails db:create
 docker compose run --rm backend bundle exec rails g scaffold post title:string body:text
 ```
 
+##### rspec Gemfile 追記 bundle 実行後下記コマンドで初期セットアップ実行
+
+```zsh
+make b
+rails generate rspec:install
+```
+
+##### factory_bot や.rspec 設定
+
+https://boku-boc.hatenablog.com/entry/2021/02/06/113735
+``` ruby
+# rails_helper.rbに追加
+config.include FactoryBot::Syntax::Methods
+```
+https://qiita.com/yutaroud/items/c197185b7d5b5378403e
+
+#### rspec API テストの書き方参照
+
+https://qiita.com/k-penguin-sato/items/defdb828bd54729272ad
+
 ### フロントエンド
 
 下記コマンドを実行
