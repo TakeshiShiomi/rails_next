@@ -1,0 +1,82 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+# 勉強メモ
+# github actionsの設定ファイルは、.github/workflows/ディレクトリに配置する。
+# on:
+# push:
+#   branches: ["main", "develop"]
+# pull_request:
+#   branches: ["main", "develop"]
+# で実行するブランチを指定できる。すべてのブランチで実行する場合はコメントアウトする。
+# name: は、GitHub Actionsの画面で表示されるジョブの名前。わかりやすい名前をつけると良い。
+# run: は、ジョブの実行内容を記述する。コマンドを記述する。
+# on: は、ジョブを実行するタイミングを指定する。push, pull_request, schedule, workflow_dispatch などが指定できる。
+# jobs: は、ジョブの設定を記述する。複数のジョブを記述することができる。
+# runs-on: は、ジョブを実行する環境を指定する。ubuntu-latest, ubuntu-20.04, ubuntu-18.04, windows-latest, windows-2019, macos-latest, macos-10.15 などが指定できる。
+name: "Ruby on Rails CI"
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.3
+      - name: Install gems
+        run: |
+          cd backend
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Set up database schema
+        run: |
+          cd backend
+          bin/rails db:create db:schema:load --trace
+      - name: Run tests
+        run: |
+          cd backend
+          bin/rake
+      - name: Rspec tests
+        run: |
+          cd backend
+          bundle exec rspec
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.3
+          bundler-cache: true
+      - name: Install dependencies
+        run: cd backend && bundle install
+      # Add or replace any other lints here
+      # bundler-auditは定期的にgemのupgradeを警告するので、コメントアウト
+      # - name: Security audit dependencies
+      #   run: cd backend && bundle exec bundler-audit check --update
+      - name: Security audit application code
+        run: cd backend && bundle exec brakeman -q -w2
+      - name: Lint Ruby files
+        run: cd backend && bundle exec rubocop --parallel

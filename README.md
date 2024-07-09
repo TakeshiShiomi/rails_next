@@ -29,3 +29,20 @@ https://qiita.com/shinKoala99/items/5c1f21996b7f3980cc06
 
 https://qiita.com/y_mizuta/items/c5f5348281a307969725 rack-cors の設定も含む
 https://speakerdeck.com/hokaccha/railsenziniafalsetamefalsenext-dot-jsru-men?slide=29
+
+### github actions について
+
+POSTGRES_PASSWORD 等の値は GitHub Secrets に設定する必要がある
+
+#### GitHub Secrets の設定方法
+
+1. **リポジトリの設定に移動**:
+   - GitHub リポジトリのトップページに移動し、右上の「Settings」タブをクリックします。
+2. **Secrets の設定**:
+   - 左側のメニューから「Secrets and variables」 > 「Actions」を選択します。
+3. **新しいシークレットを追加**:
+   - 「New repository secret」ボタンをクリックし、以下のようにシークレットを追加します。
+     - DOCKER_USERNAME: Docker Hub のユーザー名
+     - DOCKER_PASSWORD: Docker Hub のパスワード
+     - POSTGRES_USER: PostgreSQL のユーザー名
+     - POSTGRES_PASSWORD: Postgres のパスワード
