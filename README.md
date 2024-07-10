@@ -48,6 +48,13 @@ docker compose up
 axios インスタンスを作成してベース URL を設定することで、各リクエストで共通の設定を使用
 https://qiita.com/natuuu0831/items/2601dc9ade7e31bf2317
 
+#### エイリアス path 使用
+
+import パスにエイリアスをかけてパス指定を楽にするように設定
+https://qiita.com/yukiji/items/b29e497aca45e7dc878e
+https://qiita.com/tatsumin0206/items/fbcac2be2892ecbaec77
+https://zenn.dev/aiq_dev/articles/3bcfc7bb2b7c1a
+
 ### 環境構築参照サイト
 
 https://qiita.com/shinKoala99/items/5c1f21996b7f3980cc06
