@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../lib/axios';
+import axiosInstance from '@lib/axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 

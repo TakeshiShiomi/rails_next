@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../../lib/axios';
+import axiosInstance from '@lib/axios';
 import { useRouter } from 'next/router';
 
 const NewPost = () => {
