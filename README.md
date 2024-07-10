@@ -1,5 +1,34 @@
 ## 環境構築
 
+### コーディング設定
+
+- Prettier for vscode
+  vscode 設定の Tab size を 2 に変更
+  vscode 設定で single quote を検索、Prettier 内の Single Quote にチェック
+
+以下のものを npm インストールし package.json に存在するか確認
+
+- prettier
+  eslint-config-prettier
+  eslint-plugin-prettier
+- eslint
+  @typescript-eslint/eslint-plugin
+
+インストールされたら script 内にコマンドを追加
+
+下記ファイルにルールを追加
+.prettierrc
+.eslintrc.json
+
+https://zenn.dev/brachio_takumi/articles/a8fecd8b1b2742
+https://ics.media/entry/17030/
+https://typescript-jp.gitbook.io/deep-dive/styleguide#semikoron
+https://zenn.dev/rescuenow/articles/c07dd571dfe10f
+https://blog.monorevo.jp/post-2104
+https://qiita.com/sakelog/items/0ca90ead7a6df0cfebf0
+https://fwywd.com/tech/next-eslint-prettier
+https://nextjs.org/docs/pages/building-your-application/configuring/eslint
+
 ### バックエンド
 
 下記コマンドを実行して新規で作成した
