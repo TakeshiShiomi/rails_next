@@ -21,10 +21,12 @@ rails generate rspec:install
 ##### factory_bot や.rspec 設定
 
 https://boku-boc.hatenablog.com/entry/2021/02/06/113735
-``` ruby
+
+```ruby
 # rails_helper.rbに追加
 config.include FactoryBot::Syntax::Methods
 ```
+
 https://qiita.com/yutaroud/items/c197185b7d5b5378403e
 
 #### rspec API テストの書き方参照
@@ -40,6 +42,11 @@ docker compose run frontend npx create-next-app@latest
 # mya-appに指定アプリ名によってdocker-composeの中身編集する必要あり
 docker compose up
 ```
+
+#### axios インスタンス
+
+axios インスタンスを作成してベース URL を設定することで、各リクエストで共通の設定を使用
+https://qiita.com/natuuu0831/items/2601dc9ade7e31bf2317
 
 ### 環境構築参照サイト
 
