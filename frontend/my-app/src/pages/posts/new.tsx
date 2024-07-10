@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../lib/axios';
 import { useRouter } from 'next/router';
 
 const NewPost = () => {
@@ -9,7 +9,7 @@ const NewPost = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/v1/posts', {
+            await axiosInstance.post('/posts', {
                 api_v1_post: {
                     title,
                     body,

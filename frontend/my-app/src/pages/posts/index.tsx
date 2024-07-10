@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../lib/axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -14,7 +14,7 @@ const PostsIndex = () => {
     const router = useRouter();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/v1/posts')
+        axiosInstance.get('/posts')
             .then(response => {
                 setPosts(response.data);
             })
@@ -27,7 +27,7 @@ const PostsIndex = () => {
         const isConfirmed = window.confirm('この投稿を削除しますか？');
         if (isConfirmed) {
             try {
-                await axios.delete(`http://localhost:3000/api/v1/posts/${id}`);
+                await axiosInstance.delete(`/posts/${id}`);
                 setPosts(posts.filter(post => post.id !== id));
             } catch (error) {
                 console.error('Error deleting post:', error);
