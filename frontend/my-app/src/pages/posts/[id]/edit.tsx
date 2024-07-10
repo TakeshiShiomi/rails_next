@@ -10,12 +10,13 @@ const EditPost = () => {
 
   useEffect(() => {
     if (id) {
-      axiosInstance.get(`/posts/${id}`)
-        .then(response => {
+      axiosInstance
+        .get(`/posts/${id}`)
+        .then((response) => {
           setTitle(response.data.title);
           setBody(response.data.body);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error fetching post:', error);
         });
     }
