@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import axiosInstance from '../../lib/axios';
 
 interface Post {
     id: number;
@@ -15,7 +15,7 @@ const PostPage = () => {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:3000/api/v1/posts/${id}`)
+            axiosInstance.get(`/posts/${id}`)
                 .then(response => {
                     setPost(response.data);
                 })
