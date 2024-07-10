@@ -1,3 +1,4 @@
+# 注意事項: このファイルはタブ文字を使用、スペース文字は使用しない
 # build
 build:
 	docker compose build
@@ -30,30 +31,40 @@ prune:
 
 # bundle install
 bundle:
-	docker compose run backend bundle
+	docker compose run --rm backend bundle
 
 # rubocop
 rubocop:
-	docker compose run backend bundle exec rubocop
+	docker compose run --rm backend bundle exec rubocop
 
 rubocop-a:
-	docker compose run backend bundle exec rubocop -a
+	docker compose run --rm backend bundle exec rubocop -a
 
 # rspec
 rspec:
-	docker compose run backend bundle exec rspec
+	docker compose run --rm backend bundle exec rspec
 
 # bundler audit
 audit:
-	docker compose run backend bundle exec bundler-audit check --update
+	docker compose run --rm backend bundle exec bundler-audit check --update
 
 # brakeman
 brake:
-	docker compose run backend bundle exec brakeman
+	docker compose run --rm backend bundle exec brakeman
 
 # backendチェック
 fixb:
-	docker compose run backend bundle exec rubocop && \
-	docker compose run backend bundle exec rspec && \
-	docker compose run backend bundle exec bundler-audit check --update && \
-	docker compose run backend bundle exec brakeman
+	docker compose run --rm backend bundle exec rubocop && \
+	docker compose run --rm backend bundle exec rspec && \
+	docker compose run --rm backend bundle exec bundler-audit check --update && \
+	docker compose run --rm backend bundle exec brakeman
+
+# frontendチェック
+fixf:
+	docker compose run --rm frontend npm run format:check && \
+	docker compose run --rm frontend npm run lint
+
+# frontend自動修正
+fixf-a:
+	docker compose run --rm frontend npm run format:fix && \
+	docker compose run --rm frontend npm run lint:fix
