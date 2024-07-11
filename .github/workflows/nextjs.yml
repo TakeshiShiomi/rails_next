@@ -21,10 +21,16 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd frontend/my-app
+          npm install
 
       - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: |
+          cd frontend/my-app
+          npx eslint . --ext .js,.jsx,.ts,.tsx
 
       - name: Run Prettier
-        run: npx prettier --check .
+        run: |
+          cd frontend/my-app
+          npx prettier --check .
