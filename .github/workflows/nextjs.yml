@@ -1,7 +1,7 @@
 name: 'Next.js CI'
 
 on:
-  push:
+  # push:　プルリクエストのみに変更
   pull_request:
 
 jobs:
