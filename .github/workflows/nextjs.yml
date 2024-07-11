@@ -7,7 +7,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./frontend/my-app
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,17 +20,11 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Change directory to frontend/my-app
-        run: cd frontend/my-app
-
       - name: Install dependencies
         run: npm install
-        working-directory: frontend/my-app
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
-        working-directory: frontend/my-app
 
       - name: Run Prettier
         run: npx prettier --check .
-        working-directory: frontend/my-app
