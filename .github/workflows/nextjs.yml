@@ -19,18 +19,13 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: ./frontend/my-app/package-lock.json
 
       - name: Install dependencies
-        run: |
-          cd frontend/my-app
-          npm install
+        run: npm install
 
       - name: Run ESLint
-        run: |
-          cd frontend/my-app
-          npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
       - name: Run Prettier
-        run: |
-          cd frontend/my-app
-          npx prettier --check .
+        run: npx prettier --check .
