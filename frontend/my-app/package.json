@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format:check": "prettier --check src",
-    "format:fix": "prettier --write src",
-    "format:cache-fix": "prettier --cache --write src"
+    "lint:all": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:allfix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "format:cache-fix": "prettier --cache --write ."
   },
   "dependencies": {
     "@typescript-eslint/parser": "^7.16.0",
