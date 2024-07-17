@@ -95,6 +95,10 @@ https://speakerdeck.com/hokaccha/railsenziniafalsetamefalsenext-dot-jsru-men?sli
 
 ### github actions について
 
+github actions はそのままだとルートディレクトリを実行するので、ディレクトリを指定する必要がある。
+https://zenn.dev/nixieminton/articles/8b26a92feb26d8
+https://zenn.dev/yamk/articles/bd9971f1efd014
+
 POSTGRES_PASSWORD 等の値は GitHub Secrets に設定する必要がある
 
 #### GitHub Secrets の設定方法

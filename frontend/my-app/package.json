@@ -8,14 +8,16 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format:check": "prettier --check src",
-    "format:fix": "prettier --write src",
-    "format:cache-fix": "prettier --cache --write src"
+    "lint:all": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:allfix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "format:cache-fix": "prettier --cache --write ."
   },
   "dependencies": {
     "@typescript-eslint/parser": "^7.16.0",
     "axios": "^1.7.2",
-    "next": "14.2.4",
+    "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -25,11 +27,11 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4",
+    "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^3.4.4",
     "typescript": "^5"
   }
 }

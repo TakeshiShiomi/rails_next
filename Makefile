@@ -62,9 +62,10 @@ fixb:
 # frontendチェック
 fixf:
 	docker compose run --rm frontend npm run format:check && \
-	docker compose run --rm frontend npm run lint
+	docker compose run --rm frontend npm run lint:all
 
 # frontend自動修正
 fixf-a:
 	docker compose run --rm frontend npm run format:fix && \
+	docker compose run --rm frontend npm run lint:allfix && \
 	docker compose run --rm frontend npm run lint:fix
