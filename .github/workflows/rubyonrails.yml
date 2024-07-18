@@ -17,9 +17,9 @@
 # on: は、ジョブを実行するタイミングを指定する。push, pull_request, schedule, workflow_dispatch などが指定できる。
 # jobs: は、ジョブの設定を記述する。複数のジョブを記述することができる。
 # runs-on: は、ジョブを実行する環境を指定する。ubuntu-latest, ubuntu-20.04, ubuntu-18.04, windows-latest, windows-2019, macos-latest, macos-10.15 などが指定できる。
-name: "Ruby on Rails CI"
+name: 'Ruby on Rails CI'
 on:
-  push:
+  # push:　プルリクエストのみに変更
   pull_request:
 jobs:
   test:
@@ -28,14 +28,14 @@ jobs:
       postgres:
         image: postgres:16
         ports:
-          - "5432:5432"
+          - '5432:5432'
         env:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/rails_test"
+      DATABASE_URL: 'postgres://rails:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/rails_test'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
