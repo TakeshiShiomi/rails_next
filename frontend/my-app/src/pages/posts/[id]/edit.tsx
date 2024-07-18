@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '@lib/axios';
 import { useRouter } from 'next/router';
 
 const EditPost = () => {
@@ -10,12 +10,13 @@ const EditPost = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:3000/api/v1/posts/${id}`)
-        .then(response => {
+      axiosInstance
+        .get(`/posts/${id}`)
+        .then((response) => {
           setTitle(response.data.title);
           setBody(response.data.body);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error fetching post:', error);
         });
     }
@@ -24,7 +25,7 @@ const EditPost = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/v1/posts/${id}`, {
+      await axiosInstance.put(`/posts/${id}`, {
         api_v1_post: {
           title,
           body,

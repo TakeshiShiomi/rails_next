@@ -1,3 +1,5 @@
-FROM node:21-alpine3.18
+FROM node:22-alpine
+
+RUN npm install -g npm@latest
 
 WORKDIR /my-app
