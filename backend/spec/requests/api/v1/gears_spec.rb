@@ -10,7 +10,7 @@ RSpec.describe "/api/v1/gears", type: :request do
   end
 
   describe "GET /show" do
-    it "ttp status okを返すこと" do
+    it "http status okを返すこと" do
       get api_v1_gear_url(gear_instance), as: :json
       expect(response).to have_http_status(:ok)
     end
