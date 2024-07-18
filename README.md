@@ -49,6 +49,10 @@ rails generate rspec:install
 
 ##### factory_bot や.rspec 設定
 
+.rspecファイルに--require rails_helperを記述すると、
+RSpecが実行される際に自動的にrails_helper.rbが読み込まれるようになる。
+これにより、各テストファイルの先頭で明示的にrequire 'rails_helper'を記述する必要がなくなり、
+テストファイルを簡潔に保つことができる。
 https://boku-boc.hatenablog.com/entry/2021/02/06/113735
 
 ```ruby
