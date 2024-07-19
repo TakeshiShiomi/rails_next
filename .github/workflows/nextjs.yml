@@ -21,11 +21,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./frontend/my-app/package-lock.json
 
-      - name: Verify ESLint installation
-        run: npm list eslint
-
       - name: Install dependencies
         run: npm install
+
+      - name: Install ESLint (if not installed)
+        run: npm install eslint --save-dev
 
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
