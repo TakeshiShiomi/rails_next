@@ -47,8 +47,7 @@ const EditGear = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const toNumberOrNull = (value: string) =>
-      value === '' ? null : parseFloat(value);
+    const toNumberOrNull = (value: string) => (value === '' ? null : parseFloat(value));
 
     const submittedData = {
       ...gearData,
@@ -70,30 +69,15 @@ const EditGear = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={gearData.name}
-            onChange={handleChange}
-          />
+          <input type="text" id="name" value={gearData.name} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="chainring">Chainring:</label>
-          <input
-            type="text"
-            id="chainring"
-            value={gearData.chainring}
-            onChange={handleChange}
-          />
+          <input type="text" id="chainring" value={gearData.chainring} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="cog">Cog:</label>
-          <input
-            type="text"
-            id="cog"
-            value={gearData.cog}
-            onChange={handleChange}
-          />
+          <input type="text" id="cog" value={gearData.cog} onChange={handleChange} />
         </div>
         <button type="submit">Update Gear</button>
       </form>
