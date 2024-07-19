@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install ESLint (if not installed)
-        run: npm install eslint --save-dev
-
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
