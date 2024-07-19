@@ -21,9 +21,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./frontend/my-app/package-lock.json
 
-      - name: Update npm to latest version
-        run: npm install -g npm@latest
-
       - name: Install dependencies
         run: npm install
 
