@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: npm run lint:all
 
       - name: Run Prettier
         run: npx prettier --check .
