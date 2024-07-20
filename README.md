@@ -29,6 +29,12 @@ https://qiita.com/sakelog/items/0ca90ead7a6df0cfebf0
 https://fwywd.com/tech/next-eslint-prettier
 https://nextjs.org/docs/pages/building-your-application/configuring/eslint
 
+- ESLint は今後 Flat Config になるので移行が必要になる（まだ NextJs に対応していない）
+  https://eslint.org/docs/latest/use/configure/migration-guide
+  https://typescript-eslint.io/getting-started/
+  https://qiita.com/hibohiboo/items/29b5c0949cb75e272ee1
+  https://qiita.com/yamatai12/items/d48fa55bddbfb3c1dc7d
+
 ### バックエンド
 
 下記コマンドを実行して新規で作成した
@@ -49,6 +55,10 @@ rails generate rspec:install
 
 ##### factory_bot や.rspec 設定
 
+.rspec ファイルに--require rails_helper を記述すると、
+RSpec が実行される際に自動的に rails_helper.rb が読み込まれるようになる。
+これにより、各テストファイルの先頭で明示的に require 'rails_helper'を記述する必要がなくなり、
+テストファイルを簡潔に保つことができる。
 https://boku-boc.hatenablog.com/entry/2021/02/06/113735
 
 ```ruby
@@ -63,6 +73,15 @@ https://qiita.com/yutaroud/items/c197185b7d5b5378403e
 https://qiita.com/k-penguin-sato/items/defdb828bd54729272ad
 
 ### フロントエンド
+
+#### npm インストールが遅い時、トラブルシューティング
+
+https://sakukaku.com/articles/91241c2c-4c85-468d-9c1f-e7aa5a3fac39
+https://qiita.com/hatai/items/ba6eadb758a667345b27
+
+#### npm アップデート方法
+
+https://zenn.dev/ikuraikura/articles/85a6d6cc9398502e8569
 
 下記コマンドを実行
 

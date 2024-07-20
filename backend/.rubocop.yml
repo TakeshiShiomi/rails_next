@@ -10,20 +10,20 @@ AllCops:
   TargetRubyVersion: 2.6
   TargetRailsVersion: 5.2
   Exclude:
-    - "vendor/**/*"
-    - "bin/**/*"
-    - "db/**/*"
-    - "tmp/**/*"
-    - "node_modules/**/*"
-    - "lib/tasks/auto_annotate_models.rake"
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
+    - 'lib/tasks/auto_annotate_models.rake'
 
 Rails:
   Enabled: true
 
 Rails/FilePath:
   Exclude:
-    - "lib/tasks/dev.rake"
-    - "spec/rails_helper.rb"
+    - 'lib/tasks/dev.rake'
+    - 'spec/rails_helper.rb'
 
 ## `and return` の形式を利用できるようにします。基本的には、&& と || を使います。
 Style/AndOr:
@@ -64,16 +64,17 @@ Layout/LineLength:
 
 Metrics/AbcSize:
   Exclude:
-    - "lib/tasks/dev.rake"
+    - 'lib/tasks/dev.rake'
 
 Metrics/BlockLength:
+  Max: 30
   CountComments: false
   Exclude:
-    - "Guardfile"
-    - "config/routes.rb"
-    - "spec/**/*"
-    - "app/views/**/*.jbuilder"
-    - "lib/tasks/dev.rake"
+    - 'Guardfile'
+    - 'config/routes.rb'
+    - 'spec/**/*'
+    - 'app/views/**/*.jbuilder'
+    - 'lib/tasks/dev.rake'
 
 Metrics/ClassLength:
   CountComments: false
@@ -82,15 +83,15 @@ Metrics/MethodLength:
   CountComments: false
   Max: 15
   Exclude:
-    - "lib/tasks/dev.rake"
+    - 'lib/tasks/dev.rake'
 
 Metrics/ModuleLength:
   CountComments: false
 
 Naming/FileName:
   Exclude:
-    - "Gemfile"
-    - "Guardfile"
+    - 'Gemfile'
+    - 'Guardfile'
 
 Naming/MethodParameterName:
   AllowedNames: [e]
@@ -122,13 +123,13 @@ RSpec/NestedGroups:
 
 Style/BlockComments:
   Exclude:
-    - "spec/spec_helper.rb"
+    - 'spec/spec_helper.rb'
 
 # https://rubocop.readthedocs.io/en/stable/cops_style/#styleblockdelimiters
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
   Exclude:
-    - "spec/**/*"
+    - 'spec/**/*'
 
 Style/ClassAndModuleChildren:
   Enabled: false

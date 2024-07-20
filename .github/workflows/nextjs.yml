@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '22.5.1' # バグ22.5.0に出たためバージョン指定 https://github.com/npm/cli/issues/7657
           cache: 'npm'
           cache-dependency-path: ./frontend/my-app/package-lock.json
 
