@@ -44,12 +44,9 @@ const WheelsIndex = () => {
       <ul>
         {wheels.map((wheel) => (
           <li key={wheel.id}>
-            <Link href={`/wheels/${wheel.id}`}>{wheel.name}</Link>{' '}
-            <p>tire: {wheel.tire}</p>
+            <Link href={`/wheels/${wheel.id}`}>{wheel.name}</Link> <p>tire: {wheel.tire}</p>
             <p>rim: {wheel.rim}</p>
-            <button onClick={() => router.push(`/wheels/${wheel.id}/edit`)}>
-              Edit
-            </button>
+            <button onClick={() => router.push(`/wheels/${wheel.id}/edit`)}>Edit</button>
             <button onClick={() => handleDelete(wheel.id)}>Delete</button>
           </li>
         ))}
