@@ -44,12 +44,9 @@ const GearsIndex = () => {
       <ul>
         {gears.map((gear) => (
           <li key={gear.id}>
-            <Link href={`/gears/${gear.id}`}>{gear.name}</Link>{' '}
-            <p>Cog: {gear.cog}</p>
+            <Link href={`/gears/${gear.id}`}>{gear.name}</Link> <p>Cog: {gear.cog}</p>
             <p>Chainring: {gear.chainring}</p>
-            <button onClick={() => router.push(`/gears/${gear.id}/edit`)}>
-              Edit
-            </button>
+            <button onClick={() => router.push(`/gears/${gear.id}/edit`)}>Edit</button>
             <button onClick={() => handleDelete(gear.id)}>Delete</button>
           </li>
         ))}

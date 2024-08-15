@@ -29,8 +29,7 @@ const NewWheel = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const toNumberOrNull = (value: string) =>
-      value === '' ? null : parseFloat(value);
+    const toNumberOrNull = (value: string) => (value === '' ? null : parseFloat(value));
 
     const submittedData = {
       ...wheelData,
@@ -52,30 +51,15 @@ const NewWheel = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={wheelData.name}
-            onChange={handleChange}
-          />
+          <input type="text" id="name" value={wheelData.name} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="rim">rim:</label>
-          <input
-            type="text"
-            id="rim"
-            value={wheelData.rim}
-            onChange={handleChange}
-          />
+          <input type="text" id="rim" value={wheelData.rim} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="tire">tire:</label>
-          <input
-            type="text"
-            id="tire"
-            value={wheelData.tire}
-            onChange={handleChange}
-          />
+          <input type="text" id="tire" value={wheelData.tire} onChange={handleChange} />
         </div>
         <button type="submit">Create Wheel</button>
       </form>
