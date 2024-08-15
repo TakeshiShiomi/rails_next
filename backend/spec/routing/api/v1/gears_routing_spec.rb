@@ -23,5 +23,9 @@ RSpec.describe Api::V1::GearsController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/api/v1/gears/1").to route_to("api/v1/gears#destroy", id: "1")
     end
+
+    it "routes to #ratio" do
+      expect(get: "/api/v1/gears/1/ratio").to route_to("api/v1/gears#ratio", id: "1")
+    end
   end
 end

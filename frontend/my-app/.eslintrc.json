@@ -12,7 +12,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": ["error", { "singleQuote": true }],
+    "prettier/prettier": ["error", { "singleQuote": true, "printWidth": 110, "trailingComma": "es5" }],
     "@typescript-eslint/no-unused-vars": "error"
   },
   "settings": {

@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :gears
+      resources :wheels, only: [:index, :show, :create, :update, :destroy] do
+        get :calculate, on: :member
+      end
+
+      resources :gears, only: [:index, :show, :create, :update, :destroy] do
+        member do
+          get :ratio
+          # get :gear_inches
+        end
+      end
+
       resources :posts
     end
   end

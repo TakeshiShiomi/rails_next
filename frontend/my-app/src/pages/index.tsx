@@ -10,6 +10,15 @@ const Home = () => {
           <li>
             <Link href="/posts">Posts</Link>
           </li>
+          <li>
+            <Link href="/gears">Gears</Link>
+          </li>
+          <li>
+            <Link href="/wheels">Wheels</Link>
+          </li>
+          <li>
+            <Link href="/bike_calculate">自転車計算</Link>
+          </li>
         </ul>
       </nav>
     </div>
