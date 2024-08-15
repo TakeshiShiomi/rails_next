@@ -1,5 +1,5 @@
 class Api::V1::WheelsController < ApplicationController
-  before_action :set_api_v1_wheel, only: %i[show update destroy]
+  before_action :set_api_v1_wheel, only: %i[show update destroy calculate]
 
   # GET /api/v1/wheels
   def index
@@ -36,6 +36,10 @@ class Api::V1::WheelsController < ApplicationController
   # DELETE /api/v1/wheels/1
   def destroy
     @api_v1_wheel.destroy!
+  end
+
+  def calculate
+    render json: { diameter: @api_v1_wheel.diameter, circumference: @api_v1_wheel.circumference }
   end
 
   private

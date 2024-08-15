@@ -29,6 +29,14 @@ down:
 prune:
 	docker system prune
 
+# db作成
+db:
+	docker compose run --rm backend bundle exec rails db:create
+
+# dbマイグレーション
+migrate:
+	docker compose run --rm backend bundle exec rails db:migrate
+
 # bundle install
 bundle:
 	docker compose run --rm backend bundle
@@ -56,8 +64,8 @@ brake:
 fixb:
 	docker compose run --rm backend bundle exec rubocop && \
 	docker compose run --rm backend bundle exec rspec && \
-	docker compose run --rm backend bundle exec bundler-audit check --update && \
-	docker compose run --rm backend bundle exec brakeman
+	docker compose run --rm backend bundle exec brakeman && \
+	docker compose run --rm backend bundle exec bundler-audit check --update
 
 # frontendチェック
 fixf:
