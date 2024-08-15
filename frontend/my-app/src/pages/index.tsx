@@ -16,6 +16,9 @@ const Home = () => {
           <li>
             <Link href="/wheels">Wheels</Link>
           </li>
+          <li>
+            <Link href="/bike_calculate">自転車計算</Link>
+          </li>
         </ul>
       </nav>
     </div>
