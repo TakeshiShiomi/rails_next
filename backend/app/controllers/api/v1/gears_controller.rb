@@ -1,5 +1,5 @@
 class Api::V1::GearsController < ApplicationController
-  before_action :set_api_v1_gear, only: %i[show update destroy]
+  before_action :set_api_v1_gear, only: %i[show update destroy ratio]
 
   # GET /api/v1/gears
   def index
@@ -36,6 +36,10 @@ class Api::V1::GearsController < ApplicationController
   # DELETE /api/v1/gears/1
   def destroy
     @api_v1_gear.destroy!
+  end
+
+  def ratio
+    render json: { ratio: @api_v1_gear.ratio }
   end
 
   private
